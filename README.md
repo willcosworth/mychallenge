@@ -65,8 +65,8 @@ Fazer o bind da Exchange pra fila
 API RESULTADOS
 URL -> http://localhost:8080/api/votos
  
-====================================================================================================================
-Como um plus - Instalação Portainer – Monitoramento Visual dos containeres
+
+Instalação Portainer – Monitoramento Visual dos containeres
 sudo docker volume create portainer_data
 sudo docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
 sudo docker ps
