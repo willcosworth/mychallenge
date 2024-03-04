@@ -52,7 +52,7 @@ use appdb;
 describe candidato1;
 describe candidato2;
 
-====================================================================================================================
+
 
 RABBITMQ
 docker run -it -d --name rabbitapp -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management-alpine
@@ -63,7 +63,7 @@ Exchange -> exc_app
 Fila -> fila_app
 Fazer o bind da Exchange pra fila
 
-====================================================================================================================
+
 
 API RESULTADOS
 URL -> http://localhost:8080/api/votos
