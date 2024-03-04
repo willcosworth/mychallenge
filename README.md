@@ -7,8 +7,8 @@ ARQUITETURA
 FRONTEND -> BACKEND -> RABBITMQ -> WORKER -> DB
 
 Cada item da arquitetura é um container em Docker.
-Criado a imagem de cada componente(Dockerfile) e na pasta raiz, utilize o docker compose para subir a aplicação.
-Para o frontend (http://localhost:80), foi utilizado Python e framework Flask, criando rotas acessíveis.
+Criado a imagem de cada componente(Dockerfile), na pasta raiz utilize o docker compose para subir a aplicação.
+Para o frontend (http://localhost:80), foi utilizado Python e framework Flask, tornando rotas acessíveis.
 No backend (http://localhost:8080), para apresentar os resultados, uma API consulta o banco de dados MySQL (localhost:3306) e retorna um Json, com os votos de cada participante e a votação total.
 Implementado conceito de fila (http://localhost:15672), usando o RabbitMQ para receber a votação do frontend e um worker que insere os dados no banco de dados.
 
