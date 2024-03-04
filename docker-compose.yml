@@ -1,0 +1,79 @@
+version: '3.8'
+
+services:
+  appdb:
+    image: mysql:5.7
+    restart: always
+    container_name: appdb
+    hostname: appdb
+#    network_mode: bridge
+    environment:
+      MYSQL_ROOT_PASSWORD: Challenge
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: app
+      MYSQL_PASSWORD: challenge
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+#      - .db/appdb.sql:/docker-entrypoint-initdb.d/init.sql:ro
+  app:
+    image: app:1.0
+    restart: always
+#    network_mode: bridge
+    environment:
+      MYSQL_HOST: appdb
+      MYSQL_PORT: 3306
+      MYSQL_DB: appdb
+      MYSQL_USER: app
+      MYSQL_PASS: challenge
+      IP_MQ: rabbitmq
+      PORT_MQ: 5672
+      USER_MQ: guest
+      PASS_MQ: guest
+      EXC_MQ: exc_app
+    ports:
+      - "80:80"
+    depends_on:
+      - appdb
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: always
+#    network_mode: bridge
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+  api:
+    image: api:1.0
+    restart: always
+#    network_mode: bridge
+    environment:
+      MYSQL_HOST: appdb
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: app
+      MYSQL_PASS: challenge
+    ports:
+      - "8080:8080"
+    depends_on:
+      - appdb
+  worker:
+    image: worker:1.0
+    restart: always
+#    network_mode: bridge
+    environment:
+      MYSQL_HOST: appdb
+      MYSQL_PORT: 3306
+      MYSQL_DB: appdb
+      MYSQL_USER: app
+      MYSQL_PASS: challenge
+      IP_MQ: rabbitmq
+      PORT_MQ: 5672
+      USER_MQ: guest
+      PASS_MQ: guest
+      EXC_MQ: exc_app
+volumes:
+  db_data:
+  rabbitmq_data:
