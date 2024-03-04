@@ -45,11 +45,13 @@ GRANT ALL PRIVILEGES ON *.* TO ‘app’@’localhost’ WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 SHOW GRANTS FOR ‘app’@’localhost’;
 EXIT;
+
 # Check visual do DB
 mysql -u app -p
 use appdb;
 describe candidato1;
 describe candidato2;
+
 ====================================================================================================================
 
 RABBITMQ
@@ -60,6 +62,7 @@ User e Senha -> guest
 Exchange -> exc_app
 Fila -> fila_app
 Fazer o bind da Exchange pra fila
+
 ====================================================================================================================
 
 API RESULTADOS
